@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bottom_nav_bar_flutter/models/menu_item.dart';
 
 class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});
@@ -8,16 +9,42 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
-  final List<Map<String, dynamic>> _dummyItems = [
-    {
-      'name': 'Brown Sugar Coffee Latte',
-      'price': 18000,
-      'category': 'Beverage',
-    },
-    {'name': 'Iced Matcha Latte', 'price': 22000, 'category': 'Beverage'},
-    {'name': 'Special Fried Rice', 'price': 25000, 'category': 'Food'},
-    {'name': 'Crispy Smashed Chicken', 'price': 20000, 'category': 'Food'},
-    {'name': 'French Fries', 'price': 15000, 'category': 'Snack'},
+  final List<MenuItem> _listMenuItems = [
+    MenuItem(
+      id_item: 'f001',
+      name_item: 'French Fries',
+      category_item: 'Food',
+      image_url_item: 'image_url_item',
+      price_item: 10000,
+    ),
+    MenuItem(
+      id_item: 'f002',
+      name_item: 'Crispy Smashed Chicken',
+      category_item: 'Food',
+      image_url_item: 'image_url_item',
+      price_item: 22000,
+    ),
+    MenuItem(
+      id_item: 'f003',
+      name_item: 'Special Fried Rice',
+      category_item: 'Food',
+      image_url_item: 'image_url_item',
+      price_item: 25000,
+    ),
+    MenuItem(
+      id_item: 'b001',
+      name_item: 'Iced Matcha Latte',
+      category_item: 'Baverage',
+      image_url_item: 'image_url_item',
+      price_item: 10000,
+    ),
+    MenuItem(
+      id_item: 'b002',
+      name_item: 'Brown Sugar Coffee Latte',
+      category_item: 'Baverage',
+      image_url_item: 'image_url_item',
+      price_item: 18000,
+    ),
   ];
 
   @override
@@ -31,32 +58,32 @@ class _CatalogScreenState extends State<CatalogScreen> {
         padding: const EdgeInsets.only(
           bottom: 100,
         ), // Beri padding bawah agar data tidak tertutup FAB besar
-        itemCount: _dummyItems.length,
+        itemCount: _listMenuItems.length,
         itemBuilder: (context, index) {
-          final item = _dummyItems[index];
+          final item = _listMenuItems[index];
           return Card(
             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: item['category'] == 'Food'
+                backgroundColor: item.category_item == 'Food'
                     ? Colors.orange
                     : Colors.blue,
                 child: Icon(
-                  item['category'] == 'Food'
+                  item.category_item == 'Food'
                       ? Icons.fastfood
                       : Icons.local_cafe,
                   color: Colors.white,
                 ),
               ),
               title: Text(
-                item['name'],
+                item.name_item,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text('Rp ${item['price']}'),
+              subtitle: Text('Rp ${item.price_item}'),
               trailing: ElevatedButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${item['name']} added to cart')),
+                    SnackBar(content: Text('${item.name_item} added to cart')),
                   );
                 },
                 child: const Icon(Icons.add),
